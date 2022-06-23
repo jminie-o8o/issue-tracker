@@ -18,7 +18,8 @@ public class IssueRepositoryImpl implements IssueRepositoryCustom {
     @Override
     public List<Issue> searchIssuesByFilter(SearchFilterDto searchFilterDto) {
         return queryFactory.selectFrom(issue)
-                .where(eqIsOpened(searchFilterDto.getIsOpened()),
+                .where(issue.isDeleted.eq(false),
+                        eqIsOpened(searchFilterDto.getIsOpened()),
                         eqAuthorId(searchFilterDto.getAuthorId()),
                         eqLabelId(searchFilterDto.getLabelId()),
                         eqMilestoneId(searchFilterDto.getMilestoneId()))
