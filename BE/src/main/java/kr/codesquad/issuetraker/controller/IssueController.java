@@ -48,4 +48,9 @@ public class IssueController {
     public ResponseEntity<List<CommentListResponseDto>> loadAllComments(@PathVariable Long issueId) {
         return ResponseEntity.ok(issueService.getAllComments(issueId));
     }
+
+    @PostMapping("/{issueId}/comments")
+    public ResponseEntity<NewCommentResponseDto> createComment(@PathVariable Long issueId, @RequestBody NewCommentRequestDto requestDto) {
+        return ResponseEntity.ok(issueService.createComment(issueId, requestDto));
+    }
 }

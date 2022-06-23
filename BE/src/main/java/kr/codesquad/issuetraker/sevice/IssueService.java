@@ -100,4 +100,13 @@ public class IssueService {
                 .map(CommentListResponseDto::of)
                 .collect(Collectors.toList());
     }
+
+    public NewCommentResponseDto createComment(Long issueId, NewCommentRequestDto requestDto) {
+        User author = userRepository.findById(requestDto.getUserId()).orElseThrow(() -> new RuntimeException());
+        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new RuntimeException());
+
+        Comment comment = new Comment(issue, author, requestDto.getContent());
+        Comment savedComment = commentRepository.save(comment);
+        return new NewCommentResponseDto(savedComment.getId());
+    }
 }

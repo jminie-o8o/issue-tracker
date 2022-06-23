@@ -25,4 +25,12 @@ public class Comment {
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
     private boolean isDeleted;
+
+    public Comment(Issue issue, User author, String content) {
+        this.issue = issue;
+        this.author = author;
+        this.content = content;
+        this.createdAt = LocalDateTime.now();
+        this.modifiedAt = LocalDateTime.now();
+    }
 }
