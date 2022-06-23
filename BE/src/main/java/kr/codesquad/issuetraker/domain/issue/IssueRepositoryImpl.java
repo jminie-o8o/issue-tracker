@@ -20,11 +20,19 @@ public class IssueRepositoryImpl implements IssueRepositoryCustom {
 
         return queryFactory.selectFrom(issue)
                 .where(issue.isDeleted.eq(false),
+                        likeTitle(searchFilterDto.getTitle()),
                         eqIsOpened(searchFilterDto.getIsOpened()),
                         eqAuthorId(searchFilterDto.getAuthorId()),
                         eqLabelId(searchFilterDto.getLabelId()),
                         eqMilestoneId(searchFilterDto.getMilestoneId()))
                 .fetch();
+    }
+
+    private BooleanExpression likeTitle(String title) {
+        if (Objects.isNull(title)) {
+            return null;
+        }
+        return issue.title.like("%" + title + "%");
     }
 
     private BooleanExpression eqIsOpened(Boolean isOpened) {
