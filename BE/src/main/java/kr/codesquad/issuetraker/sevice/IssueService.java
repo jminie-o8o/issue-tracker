@@ -24,8 +24,8 @@ public class IssueService {
     private final MilestoneRepository milestoneRepository;
     private final LabelRepository labelRepository;
 
-    public List<IssueListResponseDto> getAllIssues() {
-        List<Issue> issues = issueRepository.findAllAvailableIssues();
+    public List<IssueListResponseDto> getAllIssues(SearchFilterDto searchFilterDto) {
+        List<Issue> issues = issueRepository.findAllAvailableIssues(searchFilterDto);
         return issues.stream()
                 .map(IssueListResponseDto::of)
                 .collect(Collectors.toList());
