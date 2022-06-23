@@ -25,7 +25,7 @@ public class IssueService {
     private final LabelRepository labelRepository;
 
     public List<IssueListResponseDto> getAllIssues(SearchFilterDto searchFilterDto) {
-        List<Issue> issues = issueRepository.findAllAvailableIssues(searchFilterDto);
+        List<Issue> issues = issueRepository.findIssuesByFilter(searchFilterDto);
         return issues.stream()
                 .map(IssueListResponseDto::of)
                 .collect(Collectors.toList());
@@ -46,6 +46,7 @@ public class IssueService {
                 .label(label)
                 .createdAt(LocalDateTime.now())
                 .modifiedAt(LocalDateTime.now())
+                .isOpened(true)
                 .build();
 
         Issue savedIssue = issueRepository.save(newIssue);

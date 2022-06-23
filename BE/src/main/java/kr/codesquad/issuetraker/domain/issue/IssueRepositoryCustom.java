@@ -5,6 +5,6 @@ import kr.codesquad.issuetraker.dto.SearchFilterDto;
 import java.util.List;
 
 public interface IssueRepositoryCustom {
-    List<Issue> searchIssuesByFilter(SearchFilterDto searchFilterDto);
+    List<Issue> findIssuesByFilter(SearchFilterDto searchFilterDto);
 
 }

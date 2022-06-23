@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IssueRepository extends JpaRepository<Issue, Long> {
+public interface IssueRepository extends JpaRepository<Issue, Long>, IssueRepositoryCustom {
     @Query(value = "SELECT i FROM Issue i where i.isDeleted = FALSE")
     public List<Issue> findAllAvailableIssues();
 }

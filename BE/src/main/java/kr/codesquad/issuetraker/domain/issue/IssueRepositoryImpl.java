@@ -16,7 +16,8 @@ public class IssueRepositoryImpl implements IssueRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<Issue> searchIssuesByFilter(SearchFilterDto searchFilterDto) {
+    public List<Issue> findIssuesByFilter(SearchFilterDto searchFilterDto) {
+
         return queryFactory.selectFrom(issue)
                 .where(issue.isDeleted.eq(false),
                         eqIsOpened(searchFilterDto.getIsOpened()),
