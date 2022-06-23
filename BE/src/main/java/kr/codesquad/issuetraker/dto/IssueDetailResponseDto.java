@@ -35,6 +35,8 @@ public class IssueDetailResponseDto {
                .assignee(assignee)
                .title(issue.getTitle())
                .description(issue.getDescription())
+               .createdAt(issue.getCreatedAt())
+               .modifiedAt(issue.getModifiedAt())
                .isOpened(issue.isOpened())
                .build();
     }
