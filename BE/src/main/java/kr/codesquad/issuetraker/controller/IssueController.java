@@ -58,4 +58,9 @@ public class IssueController {
     public ResponseEntity<GeneralResponseDto> modifyCommentContent(@PathVariable Long issueId, @PathVariable Long commentId, @RequestBody CommentModificationRequestDto requestDto) {
         return ResponseEntity.ok(issueService.modifyComment(issueId, commentId, requestDto));
     }
+
+    @DeleteMapping("/{issueId}/comments/{commentId}")
+    public ResponseEntity<GeneralResponseDto> deleteComment(@PathVariable Long issueId, @PathVariable Long commentId) {
+        return ResponseEntity.ok(issueService.deleteComment(issueId, commentId));
+    }
 }

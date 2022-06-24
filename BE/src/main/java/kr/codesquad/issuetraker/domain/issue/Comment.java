@@ -1,7 +1,6 @@
 package kr.codesquad.issuetraker.domain.issue;
 
 import kr.codesquad.issuetraker.domain.user.User;
-import kr.codesquad.issuetraker.dto.CommentModificationRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -37,6 +36,11 @@ public class Comment {
 
     public void modifyContent(String content) {
         this.content = content;
+        this.modifiedAt = LocalDateTime.now();
+    }
+
+    public void markAsDeleted() {
+        this.isDeleted = true;
         this.modifiedAt = LocalDateTime.now();
     }
 }

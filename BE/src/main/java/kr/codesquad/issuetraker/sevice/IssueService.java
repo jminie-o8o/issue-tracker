@@ -116,4 +116,11 @@ public class IssueService {
         commentRepository.save(comment);
         return new GeneralResponseDto(200, "댓글이 수정되었습니다.");
     }
+
+    public GeneralResponseDto deleteComment(Long issueId, Long commentId) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new RuntimeException());
+        comment.markAsDeleted();
+        commentRepository.save(comment);
+        return new GeneralResponseDto(200, "댓글이 삭제되었습니다.");
+    }
 }
