@@ -8,6 +8,7 @@ import kr.codesquad.issuetraker.domain.milestone.MilestoneRepository;
 import kr.codesquad.issuetraker.domain.user.User;
 import kr.codesquad.issuetraker.domain.user.UserRepository;
 import kr.codesquad.issuetraker.dto.*;
+import kr.codesquad.issuetraker.exception.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,10 +33,10 @@ public class IssueService {
     }
 
     public NewIssueResponseDto createIssue(NewIssueRequestDto requestDto) {
-        User author = userRepository.findById(requestDto.getAuthorId()).orElseThrow(() -> new RuntimeException());
-        User assignee = userRepository.findById(requestDto.getAssigneeId()).orElseThrow(() -> new RuntimeException());
-        Label label = labelRepository.findById(requestDto.getLabelId()).orElseThrow(() -> new RuntimeException());
-        Milestone milestone = milestoneRepository.findById(requestDto.getMileStoneId()).orElseThrow(() -> new RuntimeException());
+        User author = userRepository.findById(requestDto.getAuthorId()).orElseThrow(() -> new UserNotFoundException());
+        User assignee = userRepository.findById(requestDto.getAssigneeId()).orElseThrow(() -> new UserNotFoundException());
+        Label label = labelRepository.findById(requestDto.getLabelId()).orElseThrow(() -> new LabelNotFoundException());
+        Milestone milestone = milestoneRepository.findById(requestDto.getMileStoneId()).orElseThrow(() -> new LabelNotFoundException());
 
         Issue newIssue = Issue.builder()
                 .title(requestDto.getTitle())
@@ -54,17 +55,17 @@ public class IssueService {
     }
 
     public IssueDetailResponseDto getIssueDetail(Long issueId) {
-        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new RuntimeException());
+        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new IssueNotFoundException());
         return IssueDetailResponseDto.of(issue);
     }
 
     public GeneralResponseDto modifyIssueContent(Long issueId, IssueModificationRequestDto requestDto) {
-        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new RuntimeException());
+        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new IssueNotFoundException());
 
-        Milestone milestone = milestoneRepository.findById(requestDto.getMileStoneId()).orElseThrow(() -> new RuntimeException());
-        Label label = labelRepository.findById(requestDto.getLabelId()).orElseThrow(() -> new RuntimeException());
-        User author = userRepository.findById(requestDto.getAuthorId()).orElseThrow(() -> new RuntimeException());
-        User assignee = userRepository.findById(requestDto.getAssigneeId()).orElseThrow(() -> new RuntimeException());
+        Milestone milestone = milestoneRepository.findById(requestDto.getMileStoneId()).orElseThrow(() -> new MilestoneNotFoundException());
+        Label label = labelRepository.findById(requestDto.getLabelId()).orElseThrow(() -> new LabelNotFoundException());
+        User author = userRepository.findById(requestDto.getAuthorId()).orElseThrow(() -> new UserNotFoundException());
+        User assignee = userRepository.findById(requestDto.getAssigneeId()).orElseThrow(() -> new UserNotFoundException());
 
         IssueModificationFields modificationFieldsDto = IssueModificationFields.builder()
                 .title(requestDto.getTitle())
@@ -81,14 +82,14 @@ public class IssueService {
     }
 
     public GeneralResponseDto changeIssueStatus(Long issueId) {
-        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new RuntimeException());
+        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new IssueNotFoundException());
         issue.toggleIsOpened();
         issueRepository.save(issue);
         return new GeneralResponseDto(200, "이슈 상태가 변경되었습니다.");
     }
 
     public GeneralResponseDto deleteIssue(Long issueId) {
-        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new RuntimeException());
+        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new IssueNotFoundException());
         issue.markAsDeleted();
         issueRepository.save(issue);
         return new GeneralResponseDto(200, "이슈가 삭제되었습니다.");
@@ -102,8 +103,8 @@ public class IssueService {
     }
 
     public NewCommentResponseDto createComment(Long issueId, NewCommentRequestDto requestDto) {
-        User author = userRepository.findById(requestDto.getUserId()).orElseThrow(() -> new RuntimeException());
-        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new RuntimeException());
+        User author = userRepository.findById(requestDto.getUserId()).orElseThrow(() -> new UserNotFoundException());
+        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new IssueNotFoundException());
 
         Comment comment = new Comment(issue, author, requestDto.getContent());
         Comment savedComment = commentRepository.save(comment);
@@ -111,14 +112,14 @@ public class IssueService {
     }
 
     public GeneralResponseDto modifyComment(Long issueId, Long commentId, CommentModificationRequestDto requestDto) {
-        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new RuntimeException());
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new CommentNotFoundException());
         comment.modifyContent(requestDto.getContent());
         commentRepository.save(comment);
         return new GeneralResponseDto(200, "댓글이 수정되었습니다.");
     }
 
     public GeneralResponseDto deleteComment(Long issueId, Long commentId) {
-        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new RuntimeException());
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new CommentNotFoundException());
         comment.markAsDeleted();
         commentRepository.save(comment);
         return new GeneralResponseDto(200, "댓글이 삭제되었습니다.");
