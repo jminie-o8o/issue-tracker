@@ -53,4 +53,9 @@ public class IssueController {
     public ResponseEntity<NewCommentResponseDto> createComment(@PathVariable Long issueId, @RequestBody NewCommentRequestDto requestDto) {
         return ResponseEntity.ok(issueService.createComment(issueId, requestDto));
     }
+
+    @PatchMapping("/{issueId}/comments/{commentId}")
+    public ResponseEntity<GeneralResponseDto> modifyCommentContent(@PathVariable Long issueId, @PathVariable Long commentId, @RequestBody CommentModificationRequestDto requestDto) {
+        return ResponseEntity.ok(issueService.modifyComment(issueId, commentId, requestDto));
+    }
 }

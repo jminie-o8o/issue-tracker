@@ -1,6 +1,7 @@
 package kr.codesquad.issuetraker.domain.issue;
 
 import kr.codesquad.issuetraker.domain.user.User;
+import kr.codesquad.issuetraker.dto.CommentModificationRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,6 +32,11 @@ public class Comment {
         this.author = author;
         this.content = content;
         this.createdAt = LocalDateTime.now();
+        this.modifiedAt = LocalDateTime.now();
+    }
+
+    public void modifyContent(String content) {
+        this.content = content;
         this.modifiedAt = LocalDateTime.now();
     }
 }

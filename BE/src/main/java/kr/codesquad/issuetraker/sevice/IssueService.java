@@ -109,4 +109,11 @@ public class IssueService {
         Comment savedComment = commentRepository.save(comment);
         return new NewCommentResponseDto(savedComment.getId());
     }
+
+    public GeneralResponseDto modifyComment(Long issueId, Long commentId, CommentModificationRequestDto requestDto) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new RuntimeException());
+        comment.modifyContent(requestDto.getContent());
+        commentRepository.save(comment);
+        return new GeneralResponseDto(200, "댓글이 수정되었습니다.");
+    }
 }
