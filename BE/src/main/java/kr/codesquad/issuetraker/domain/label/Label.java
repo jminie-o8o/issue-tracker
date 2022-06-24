@@ -1,11 +1,15 @@
 package kr.codesquad.issuetraker.domain.label;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Getter
 @Entity
 public class Label {
@@ -15,5 +19,4 @@ public class Label {
     private String name;
     private String description;
     private String backgroundColor;
-    private String letterColor;
 }
