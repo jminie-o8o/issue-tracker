@@ -25,7 +25,7 @@ public class IssueController {
     }
 
     @GetMapping("/{issueId}")
-    public ResponseEntity<IssueDetailResponseDto> loadIssueDetails(@PathVariable Long issueId) {
+    public ResponseEntity<IssueDetailResponseDto> loadIssueDetail(@PathVariable Long issueId) {
         return ResponseEntity.ok(issueService.getIssueDetail(issueId));
     }
 
