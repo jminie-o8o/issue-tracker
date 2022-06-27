@@ -2,9 +2,7 @@ package kr.codesquad.issuetraker.domain.milestone;
 
 import kr.codesquad.issuetraker.domain.issue.Issue;
 import kr.codesquad.issuetraker.domain.user.User;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Getter
 @Entity
 public class Milestone {
