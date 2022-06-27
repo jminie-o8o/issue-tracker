@@ -1,6 +1,5 @@
 package kr.codesquad.issuetraker.dto;
 
-import javafx.beans.binding.BooleanExpression;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
