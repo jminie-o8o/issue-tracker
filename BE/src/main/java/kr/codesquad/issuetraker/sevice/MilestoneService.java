@@ -47,7 +47,7 @@ public class MilestoneService {
         Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(() -> new MilestoneNotFoundException());
         milestone.modifyContentsWith(requestDto);
         milestoneRepository.save(milestone);
-        return new GeneralResponseDto(200, "이슈가 성공적으로 수정되었습니다.");
+        return new GeneralResponseDto(200, "마일스톤이 성공적으로 수정되었습니다.");
     }
 
     public GeneralResponseDto deleteMilestone(Long milestoneId) {
