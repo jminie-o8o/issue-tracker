@@ -41,4 +41,9 @@ public class Milestone {
         dueDate = requestDto.getDueDate();
         modifiedAt = LocalDateTime.now();
     }
+
+    public void markAsDeleted() {
+        isDeleted = true;
+        modifiedAt = LocalDateTime.now();
+    }
 }

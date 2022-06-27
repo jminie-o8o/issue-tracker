@@ -35,4 +35,9 @@ public class MilestoneController {
         return ResponseEntity.ok(milestoneService.modifyMilestone(milestoneId, requestDto));
     }
 
+    @DeleteMapping("/{milestoneId}")
+    public ResponseEntity<GeneralResponseDto> deleteMilestone(@PathVariable Long milestoneId) {
+        return ResponseEntity.ok(milestoneService.deleteMilestone(milestoneId));
+    }
+
 }

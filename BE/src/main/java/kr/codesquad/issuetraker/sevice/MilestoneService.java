@@ -49,4 +49,11 @@ public class MilestoneService {
         milestoneRepository.save(milestone);
         return new GeneralResponseDto(200, "이슈가 성공적으로 수정되었습니다.");
     }
+
+    public GeneralResponseDto deleteMilestone(Long milestoneId) {
+        Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(() -> new MilestoneNotFoundException());
+        milestone.markAsDeleted();
+        milestoneRepository.save(milestone);
+        return new GeneralResponseDto(200, "마일스톤이 성공적으로 삭제되었습니다.");
+    }
 }
