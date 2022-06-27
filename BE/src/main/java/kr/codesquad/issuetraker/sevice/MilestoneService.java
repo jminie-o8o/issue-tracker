@@ -18,7 +18,7 @@ public class MilestoneService {
     private final MilestoneRepository milestoneRepository;
 
     public List<MilestoneListResponseDto> getAllMilestones() {
-        List<Milestone> milestones = milestoneRepository.findAll();
+        List<Milestone> milestones = milestoneRepository.findAllAvailableIssues();
         return milestones.stream()
                 .map(MilestoneListResponseDto::of)
                 .collect(Collectors.toList());
