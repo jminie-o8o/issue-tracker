@@ -2,6 +2,7 @@ package kr.codesquad.issuetraker.domain.milestone;
 
 import kr.codesquad.issuetraker.domain.issue.Issue;
 import kr.codesquad.issuetraker.domain.user.User;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,10 +22,15 @@ public class Milestone {
     private Long id;
     private String title;
     private String description;
+    @Getter(AccessLevel.NONE)
     @OneToMany(mappedBy = "milestone")
     private final List<Issue> issues = new ArrayList<>();
     private LocalDate dueDate;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
     private boolean isDeleted;
+
+    public List<Issue> getIssues() {
+        return new ArrayList<>(issues);
+    }
 }
