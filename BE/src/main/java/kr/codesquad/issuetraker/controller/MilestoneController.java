@@ -2,6 +2,7 @@ package kr.codesquad.issuetraker.controller;
 
 import kr.codesquad.issuetraker.dto.MilestoneCreationRequestDto;
 import kr.codesquad.issuetraker.dto.MilestoneCreationResponseDto;
+import kr.codesquad.issuetraker.dto.MilestoneDetailResponseDto;
 import kr.codesquad.issuetraker.dto.MilestoneListResponseDto;
 import kr.codesquad.issuetraker.sevice.MilestoneService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,11 @@ public class MilestoneController {
     @PostMapping
     public ResponseEntity<MilestoneCreationResponseDto> createMilestone(@RequestBody MilestoneCreationRequestDto requestDto) {
         return ResponseEntity.ok(milestoneService.createMilestone(requestDto));
+    }
+
+    @GetMapping("/{milestoneId}")
+    public ResponseEntity<MilestoneDetailResponseDto> loadMilestoneDetail(@PathVariable Long milestoneId) {
+        return ResponseEntity.ok(milestoneService.getMilestoneDetail(milestoneId));
     }
 
 }

@@ -4,7 +4,9 @@ import kr.codesquad.issuetraker.domain.milestone.Milestone;
 import kr.codesquad.issuetraker.domain.milestone.MilestoneRepository;
 import kr.codesquad.issuetraker.dto.MilestoneCreationRequestDto;
 import kr.codesquad.issuetraker.dto.MilestoneCreationResponseDto;
+import kr.codesquad.issuetraker.dto.MilestoneDetailResponseDto;
 import kr.codesquad.issuetraker.dto.MilestoneListResponseDto;
+import kr.codesquad.issuetraker.exception.MilestoneNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +39,10 @@ public class MilestoneService {
 
         Milestone savedMilestone = milestoneRepository.save(milestone);
         return new MilestoneCreationResponseDto(savedMilestone.getId());
+    }
+
+    public MilestoneDetailResponseDto getMilestoneDetail(Long milestoneId) {
+        Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(() -> new MilestoneNotFoundException());
+        return MilestoneDetailResponseDto.of(milestone);
     }
 }
