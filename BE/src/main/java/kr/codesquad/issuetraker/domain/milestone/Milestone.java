@@ -2,6 +2,7 @@ package kr.codesquad.issuetraker.domain.milestone;
 
 import kr.codesquad.issuetraker.domain.issue.Issue;
 import kr.codesquad.issuetraker.domain.user.User;
+import kr.codesquad.issuetraker.dto.MilestoneModificationRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,5 +33,12 @@ public class Milestone {
 
     public List<Issue> getIssues() {
         return new ArrayList<>(issues);
+    }
+
+    public void modifyContentsWith(MilestoneModificationRequestDto requestDto) {
+        title = requestDto.getTitle();
+        description = requestDto.getDescription();
+        dueDate = requestDto.getDueDate();
+        modifiedAt = LocalDateTime.now();
     }
 }

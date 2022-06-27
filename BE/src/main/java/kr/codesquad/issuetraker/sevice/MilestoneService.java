@@ -2,10 +2,7 @@ package kr.codesquad.issuetraker.sevice;
 
 import kr.codesquad.issuetraker.domain.milestone.Milestone;
 import kr.codesquad.issuetraker.domain.milestone.MilestoneRepository;
-import kr.codesquad.issuetraker.dto.MilestoneCreationRequestDto;
-import kr.codesquad.issuetraker.dto.MilestoneCreationResponseDto;
-import kr.codesquad.issuetraker.dto.MilestoneDetailResponseDto;
-import kr.codesquad.issuetraker.dto.MilestoneListResponseDto;
+import kr.codesquad.issuetraker.dto.*;
 import kr.codesquad.issuetraker.exception.MilestoneNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -44,5 +41,12 @@ public class MilestoneService {
     public MilestoneDetailResponseDto getMilestoneDetail(Long milestoneId) {
         Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(() -> new MilestoneNotFoundException());
         return MilestoneDetailResponseDto.of(milestone);
+    }
+
+    public GeneralResponseDto modifyMilestone(Long milestoneId, MilestoneModificationRequestDto requestDto) {
+        Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(() -> new MilestoneNotFoundException());
+        milestone.modifyContentsWith(requestDto);
+        milestoneRepository.save(milestone);
+        return new GeneralResponseDto(200, "이슈가 성공적으로 수정되었습니다.");
     }
 }
