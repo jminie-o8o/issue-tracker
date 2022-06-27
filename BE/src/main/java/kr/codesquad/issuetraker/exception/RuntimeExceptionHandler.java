@@ -3,10 +3,10 @@ package kr.codesquad.issuetraker.exception;
 import kr.codesquad.issuetraker.dto.GeneralResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class RuntimeExceptionHandler {
     @ExceptionHandler(value = ResourceNotFoundException.class)
     public ResponseEntity<GeneralResponseDto> handleResourceNotFoundException(Exception e) {
@@ -15,6 +15,6 @@ public class RuntimeExceptionHandler {
 
     @ExceptionHandler(value = IllegalArgumentException.class)
     public ResponseEntity<GeneralResponseDto> handleIllegalArgumentException(Exception e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new GeneralResponseDto(400, "올바르지 않은 요청입니다."));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new GeneralResponseDto(400, "올바르지 않은 요청입니다. 누락되거나 잘못된 요청값이 있는지 확인해주세요."));
     }
 }
