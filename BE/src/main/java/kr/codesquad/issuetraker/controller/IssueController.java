@@ -15,7 +15,7 @@ public class IssueController {
     private final IssueService issueService;
 
     @GetMapping
-    public ResponseEntity<List<IssueListResponseDto>> loadAllIssues(@ModelAttribute SearchFilterDto searchFilterDto) {
+    public ResponseEntity<IssueListResponseDto> loadAllIssues(@ModelAttribute SearchFilterDto searchFilterDto) {
         return ResponseEntity.ok(issueService.getAllIssues(searchFilterDto));
     }
 

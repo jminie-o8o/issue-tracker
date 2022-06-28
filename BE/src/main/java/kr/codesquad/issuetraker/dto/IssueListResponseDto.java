@@ -1,27 +1,15 @@
 package kr.codesquad.issuetraker.dto;
 
-import kr.codesquad.issuetraker.domain.issue.Issue;
-import kr.codesquad.issuetraker.domain.label.Label;
-import lombok.Builder;
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
-@Builder
 public class IssueListResponseDto {
-    private Long issueId;
-    private String title;
-    private String description;
-    private String milestoneTitle;
-    private Label label;
+    private List<IssueListElementDto> issues;
 
-    public static IssueListResponseDto of(Issue issue) {
-        return IssueListResponseDto.builder()
-                .issueId(issue.getId())
-                .title(issue.getTitle())
-                .description(issue.getDescription())
-                .milestoneTitle(issue.getMilestone().getTitle())
-                .label(issue.getLabel())
-                .build();
+    public IssueListResponseDto(List<IssueListElementDto> issues) {
+        this.issues = new ArrayList<>(issues);
     }
-
 }

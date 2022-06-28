@@ -16,7 +16,7 @@ public class MilestoneController {
     private final MilestoneService milestoneService;
 
     @GetMapping
-    public ResponseEntity<List<MilestoneListResponseDto>> loadAllMilestones() {
+    public ResponseEntity<MilestoneListResponseDto> loadAllMilestones() {
         return ResponseEntity.ok(milestoneService.getAllMilestones());
     }
 

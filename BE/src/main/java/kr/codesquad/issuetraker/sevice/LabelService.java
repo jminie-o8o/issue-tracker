@@ -4,6 +4,7 @@ import kr.codesquad.issuetraker.domain.label.Label;
 import kr.codesquad.issuetraker.domain.label.LabelRepository;
 import kr.codesquad.issuetraker.dto.LabelCreationRequestDto;
 import kr.codesquad.issuetraker.dto.LabelCreationResponseDto;
+import kr.codesquad.issuetraker.dto.LabelListElementDto;
 import kr.codesquad.issuetraker.dto.LabelListResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,11 +18,12 @@ public class LabelService {
 
     private final LabelRepository labelRepository;
 
-    public List<LabelListResponseDto> getAllLabels() {
+    public LabelListResponseDto getAllLabels() {
         List<Label> labels = labelRepository.findAll();
-        return labels.stream()
-                .map(LabelListResponseDto::of)
+        List<LabelListElementDto> labelElements = labels.stream()
+                .map(LabelListElementDto::of)
                 .collect(Collectors.toList());
+        return new LabelListResponseDto(labelElements);
     }
 
     public LabelCreationResponseDto createLabel(LabelCreationRequestDto requestDto) {

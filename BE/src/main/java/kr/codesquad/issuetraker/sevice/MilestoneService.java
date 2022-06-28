@@ -17,11 +17,12 @@ public class MilestoneService {
 
     private final MilestoneRepository milestoneRepository;
 
-    public List<MilestoneListResponseDto> getAllMilestones() {
+    public MilestoneListResponseDto getAllMilestones() {
         List<Milestone> milestones = milestoneRepository.findAllAvailableIssues();
-        return milestones.stream()
-                .map(MilestoneListResponseDto::of)
+        List<MilestoneListElementDto> milestoneElements = milestones.stream()
+                .map(MilestoneListElementDto::of)
                 .collect(Collectors.toList());
+        return new MilestoneListResponseDto(milestoneElements);
     }
 
     public MilestoneCreationResponseDto createMilestone(MilestoneCreationRequestDto requestDto) {
