@@ -28,7 +28,7 @@ public class LoginService {
     private final JwtProvider jwtProvider;
 
     public JwtResponseDto loginWithOauth(OauthLoginRequestDto requestDto) {
-        OauthClient oauthClient = oauthClientMapper.getOauthClient(requestDto.getOauthClientType())
+        OauthClient oauthClient = oauthClientMapper.getOauthClient(requestDto.getOauthClientName())
                 .orElseThrow(() -> new InvalidOauthClientNameException());
         OauthUserInfo userInfo = oauthClient.getUserInfo(requestDto.getAuthCode());
         User user = userRepository.findByEmail(userInfo.getEmail())

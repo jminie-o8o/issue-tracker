@@ -6,12 +6,12 @@ import java.util.Map;
 import java.util.Optional;
 
 public class OauthClientMapper {
-    private Map<OauthClientType, OauthClient> clientMap;
+    private Map<String, OauthClient> clientMap;
 
-    public OauthClientMapper(Map<OauthClientType, OauthClient> clientMap) {
+    public OauthClientMapper(Map<String, OauthClient> clientMap) {
         this.clientMap = new HashMap<>(clientMap);
     }
-    public Optional<OauthClient> getOauthClient(OauthClientType oauthClientType) {
-        return null;
+    public Optional<OauthClient> getOauthClient(String oauthClientType) {
+        return Optional.of(clientMap.get(oauthClientType));
     }
 }

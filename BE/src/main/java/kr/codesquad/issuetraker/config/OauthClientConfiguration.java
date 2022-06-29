@@ -35,10 +35,10 @@ public class OauthClientConfiguration {
         GithubOauthClient github = new GithubOauthClient(githubClientId, githubAuthServerUrl, githubResourceServerUrl, githubSecretKey);
         KakaoOauthClient kakao = new KakaoOauthClient(kakaoClientId, kakaoAuthServerUrl, kakaoResourceServerUrl, kakaoSecretKey);
 
-        Map<OauthClientType, OauthClient> clientMap = new HashMap<>();
+        Map<String, OauthClient> clientMap = new HashMap<>();
 
-        clientMap.put(OauthClientType.GITHUB, github);
-        clientMap.put(OauthClientType.KAKAO, kakao);
+        clientMap.put("GITHUB", github);
+        clientMap.put("KAKAO", kakao);
 
         return new OauthClientMapper(clientMap);
     }
