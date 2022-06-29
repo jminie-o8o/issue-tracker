@@ -30,8 +30,6 @@ public class MilestoneService {
                 .title(requestDto.getTitle())
                 .description(requestDto.getDescription())
                 .dueDate(requestDto.getDueDate())
-                .createdAt(LocalDateTime.now())
-                .modifiedAt(LocalDateTime.now())
                 .isDeleted(false)
                 .build();
 

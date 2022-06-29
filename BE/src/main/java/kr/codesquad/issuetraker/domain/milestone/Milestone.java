@@ -1,5 +1,6 @@
 package kr.codesquad.issuetraker.domain.milestone;
 
+import kr.codesquad.issuetraker.domain.BaseTimeEntity;
 import kr.codesquad.issuetraker.domain.issue.Issue;
 import kr.codesquad.issuetraker.domain.user.User;
 import kr.codesquad.issuetraker.dto.MilestoneModificationRequestDto;
@@ -16,7 +17,7 @@ import java.util.List;
 @Builder
 @Getter
 @Entity
-public class Milestone {
+public class Milestone extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "milestone_id")
@@ -27,8 +28,6 @@ public class Milestone {
     @OneToMany(mappedBy = "milestone")
     private final List<Issue> issues = new ArrayList<>();
     private LocalDate dueDate;
-    private LocalDateTime createdAt;
-    private LocalDateTime modifiedAt;
     private boolean isDeleted;
 
     public List<Issue> getIssues() {
@@ -39,11 +38,9 @@ public class Milestone {
         title = requestDto.getTitle();
         description = requestDto.getDescription();
         dueDate = requestDto.getDueDate();
-        modifiedAt = LocalDateTime.now();
     }
 
     public void markAsDeleted() {
         isDeleted = true;
-        modifiedAt = LocalDateTime.now();
     }
 }

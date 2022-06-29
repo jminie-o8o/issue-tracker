@@ -1,5 +1,6 @@
 package kr.codesquad.issuetraker.domain.issue;
 
+import kr.codesquad.issuetraker.domain.BaseTimeEntity;
 import kr.codesquad.issuetraker.domain.label.Label;
 import kr.codesquad.issuetraker.domain.milestone.Milestone;
 import kr.codesquad.issuetraker.domain.user.User;
@@ -18,7 +19,7 @@ import java.util.List;
 @Getter
 @Builder
 @Entity
-public class Issue {
+public class Issue extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "issue_id")
@@ -40,8 +41,6 @@ public class Issue {
     @JoinColumn(name = "label_id")
     private Label label;
     private boolean isOpened = true;
-    private LocalDateTime createdAt;
-    private LocalDateTime modifiedAt;
     private boolean isDeleted;
 
 
@@ -52,17 +51,14 @@ public class Issue {
         label = modificationFields.getLabel();
         author = modificationFields.getAuthor();
         assignee = modificationFields.getAssignee();
-        modifiedAt = LocalDateTime.now();
     }
 
     public void toggleIsOpened() {
         isOpened = !isOpened;
-        modifiedAt = LocalDateTime.now();
     }
 
 
     public void markAsDeleted() {
         isDeleted = true;
-        modifiedAt = LocalDateTime.now();
     }
 }

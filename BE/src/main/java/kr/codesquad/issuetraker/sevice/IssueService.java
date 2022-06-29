@@ -46,8 +46,6 @@ public class IssueService {
                 .author(author)
                 .assignee(assignee)
                 .label(label)
-                .createdAt(LocalDateTime.now())
-                .modifiedAt(LocalDateTime.now())
                 .isOpened(true)
                 .build();
 
