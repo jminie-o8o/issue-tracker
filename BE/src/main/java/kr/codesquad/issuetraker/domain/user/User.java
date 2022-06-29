@@ -1,5 +1,6 @@
 package kr.codesquad.issuetraker.domain.user;
 
+import kr.codesquad.issuetraker.login.oauth.OauthClientType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -17,5 +18,12 @@ public class User {
     private String password;
     private String profileImageUrl;
     @Enumerated(EnumType.STRING)
-    private OauthClient oauthClient;
+    private OauthClientType oauthClientType;
+
+    public User(String email, String displayName, String password, OauthClientType oauthClientType) {
+        this.email = email;
+        this.displayName = displayName;
+        this.password = password;
+        this.oauthClientType = oauthClientType;
+    }
 }
