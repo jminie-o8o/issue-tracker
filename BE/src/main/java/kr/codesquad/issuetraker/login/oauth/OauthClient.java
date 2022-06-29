@@ -1,6 +1,7 @@
 package kr.codesquad.issuetraker.login.oauth;
 
 import kr.codesquad.issuetraker.login.userinfo.OauthUserInfo;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -43,15 +44,17 @@ public abstract class OauthClient {
     }
 
     private String getAccessToken(String authCode) {
-        WebClient webClient = WebClient.create();
-        Map<String, String> bodyValues = new HashMap<>();
-        bodyValues.put("client_id", "896365878d33e50fa28b");
-        bodyValues.put("code", authCode);
-        bodyValues.put("client_secret", secretKey);
+        WebClient webClient = WebClient.builder()
+                .baseUrl(authServerUrl)
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .build();
 
         String rawToken = webClient.post()
-                .uri(authServerUrl)
-                .body(Mono.just(bodyValues), Map.class)
+                .uri(uriBuilder -> uriBuilder
+                        .queryParam("client_id", clientId)
+                        .queryParam("client_secret", secretKey)
+                        .queryParam("code", authCode)
+                        .build())
                 .accept(MediaType.APPLICATION_JSON)
                 .acceptCharset(StandardCharsets.UTF_8)
                 .ifNoneMatch("*")
