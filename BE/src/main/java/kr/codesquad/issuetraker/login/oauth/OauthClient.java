@@ -12,10 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class OauthClient {
-    private String clientId;
-    private String authServerUrl;
-    private String resourceServerUrl;
-    private String secretKey;
+    protected String clientId;
+    protected String authServerUrl;
+    protected String resourceServerUrl;
+    protected String secretKey;
 
     protected OauthClient(String clientId, String authServerUrl, String resourceServerUrl, String secretKey) {
         this.clientId = clientId;
@@ -43,29 +43,7 @@ public abstract class OauthClient {
                 .orElseThrow(() -> new RuntimeException());
     }
 
-    private String getAccessToken(String authCode) {
-        WebClient webClient = WebClient.builder()
-                .baseUrl(authServerUrl)
-                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .build();
-
-        String rawToken = webClient.post()
-                .uri(uriBuilder -> uriBuilder
-                        .queryParam("client_id", clientId)
-                        .queryParam("client_secret", secretKey)
-                        .queryParam("code", authCode)
-                        .build())
-                .accept(MediaType.APPLICATION_JSON)
-                .acceptCharset(StandardCharsets.UTF_8)
-                .ifNoneMatch("*")
-                .ifModifiedSince(ZonedDateTime.now())
-                .retrieve()
-                .bodyToFlux(String.class)
-                .toStream()
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException());
-        return parseToken(rawToken);
-    }
+    protected abstract String getAccessToken(String authCode);
 
     protected abstract String parseToken(String rawToken);
     protected abstract OauthUserInfo convertToUserInfoFrom(String rawInfo);
