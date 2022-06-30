@@ -13,6 +13,7 @@ public class IssueListElementDto {
     private String description;
     private String milestoneTitle;
     private Label label;
+    private Boolean isOpened;
 
     public static IssueListElementDto of(Issue issue) {
         return IssueListElementDto.builder()
@@ -21,6 +22,7 @@ public class IssueListElementDto {
                 .description(issue.getDescription())
                 .milestoneTitle(issue.getMilestone().getTitle())
                 .label(issue.getLabel())
+                .isOpened(issue.isOpened())
                 .build();
     }
 
