@@ -30,7 +30,7 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserRegistrationResponseDto> registerWithPassword(@RequestBody UserRegisterRequestDto requestDto) throws NoSuchAlgorithmException {
+    public ResponseEntity<GeneralResponseDto> registerWithPassword(@RequestBody UserRegisterRequestDto requestDto) throws NoSuchAlgorithmException {
         return ResponseEntity.ok(loginService.registerUserWithPassword(requestDto));
     }
 

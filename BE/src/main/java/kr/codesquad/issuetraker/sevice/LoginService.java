@@ -54,10 +54,10 @@ public class LoginService {
         }
     }
 
-    public UserRegistrationResponseDto registerUserWithPassword(UserRegisterRequestDto requestDto) throws NoSuchAlgorithmException {
+    public GeneralResponseDto registerUserWithPassword(UserRegisterRequestDto requestDto) throws NoSuchAlgorithmException {
         PasswordUserInfo userInfo = PasswordUserInfo.ofRegisterRequest(requestDto);
         User registeredUser = registerUser(userInfo);
-        return UserRegistrationResponseDto.of(registeredUser);
+        return new GeneralResponseDto(200, "회원가입에 성공했습니다.");
     }
 
     private User registerUser(UserInfo userInfo) {
