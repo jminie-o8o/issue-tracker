@@ -1,6 +1,7 @@
 package kr.codesquad.issuetraker.login.oauth;
 
 import com.google.gson.Gson;
+import kr.codesquad.issuetraker.dto.KakaoAccessTokenResponseDto;
 import kr.codesquad.issuetraker.login.userinfo.OauthUserInfo;
 import lombok.Builder;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +24,7 @@ public class KakaoOauthClient extends OauthClient {
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
 
-        String rawToken = webClient.post()
+        KakaoAccessTokenResponseDto rawToken = webClient.post()
                 .uri(uriBuilder -> uriBuilder
                         .queryParam("client_id", "9dc5e51153cd29428199781510c17a32")
                         .queryParam("redirect_url", "http://52.79.243.28:8080/login/oauth/callback")
@@ -35,18 +36,16 @@ public class KakaoOauthClient extends OauthClient {
                 .ifNoneMatch("*")
                 .ifModifiedSince(ZonedDateTime.now())
                 .retrieve()
-                .bodyToFlux(String.class)
+                .bodyToFlux(KakaoAccessTokenResponseDto.class)
                 .toStream()
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException());
-        return parseToken(rawToken);
+        return parseToken(rawToken.getAccessToken());
     }
-
-
 
     @Override
     protected String parseToken(String rawToken) {
-        return String.format("Bearer %s", rawToken.split("" + (char)34)[3]);
+        return String.format("Bearer %s", rawToken);
     }
 
     @Override
