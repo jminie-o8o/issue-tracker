@@ -33,8 +33,10 @@ public class LoginService {
         OauthClient oauthClient = oauthClientMapper.getOauthClient(requestDto.getOauthClientName())
                 .orElseThrow(() -> new InvalidOauthClientNameException());
         OauthUserInfo userInfo = oauthClient.getUserInfo(requestDto.getAuthCode());
+
         User user = userRepository.findByEmail(userInfo.getEmail())
                 .orElseGet(() -> registerUser(userInfo));
+
         JwtToken accessToken = jwtProvider.createToken(user, JwtTokenType.ACCESS);
         JwtToken refreshToken = jwtProvider.createToken(user, JwtTokenType.REFRESH);
         return JwtResponseDto.of(accessToken, refreshToken);
@@ -42,16 +44,17 @@ public class LoginService {
 
     public JwtResponseDto loginWithPassword(PasswordLoginRequestDto requestDto) throws NoSuchAlgorithmException {
         PasswordUserInfo userInfo = PasswordUserInfo.ofLoginRequest(requestDto);
-        User user = userRepository.findByEmail(userInfo.getEmail())
+        User userInDatabase = userRepository.findByEmail(userInfo.getEmail())
                 .orElseThrow(() -> new UserNotFoundException());
-        validatePassword(user, userInfo);
-        JwtToken accessToken = jwtProvider.createToken(user, JwtTokenType.ACCESS);
-        JwtToken refreshToken = jwtProvider.createToken(user, JwtTokenType.REFRESH);
+        validatePassword(userInDatabase, userInfo);
+
+        JwtToken accessToken = jwtProvider.createToken(userInDatabase, JwtTokenType.ACCESS);
+        JwtToken refreshToken = jwtProvider.createToken(userInDatabase, JwtTokenType.REFRESH);
         return JwtResponseDto.of(accessToken, refreshToken);
     }
 
     private void validatePassword(User user, PasswordUserInfo userInfo) {
-        if (!user.getPassword().equals(userInfo.getPassword())) {
+        if (!user.isSamePassword(userInfo.getPassword())) {
             throw new PasswordNotMatchedException();
         }
     }

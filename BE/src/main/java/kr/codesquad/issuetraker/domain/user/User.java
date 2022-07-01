@@ -26,4 +26,8 @@ public class User {
         this.password = password;
         this.oauthClientType = oauthClientType;
     }
+
+    public boolean isSamePassword(String password) {
+        return this.password.equals(password);
+    }
 }
