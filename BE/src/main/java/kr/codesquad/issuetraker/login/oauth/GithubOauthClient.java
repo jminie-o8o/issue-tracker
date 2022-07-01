@@ -2,6 +2,7 @@ package kr.codesquad.issuetraker.login.oauth;
 
 import com.google.gson.Gson;
 import kr.codesquad.issuetraker.login.userinfo.OauthUserInfo;
+import lombok.Builder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
