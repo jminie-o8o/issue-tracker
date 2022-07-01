@@ -3,6 +3,8 @@ package kr.codesquad.issuetraker.login.jwt;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import kr.codesquad.issuetraker.domain.user.User;
+import kr.codesquad.issuetraker.exception.ExpiredJwtTokenException;
+import kr.codesquad.issuetraker.exception.InvalidJwtTokenException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.StandardCharsets;
@@ -47,17 +49,20 @@ public class JwtProvider {
                     .getBody();
         } catch (SecurityException e) {
             log.info("⚠️Invalid JWT signature.");
+            throw new InvalidJwtTokenException();
         } catch (MalformedJwtException e) {
             log.info("⚠️Invalid JWT token.");
+            throw new InvalidJwtTokenException();
         } catch (ExpiredJwtException e) {
             // TODO : 만료된 토큰 처리
             log.info("⚠️Expired JWT token.");
-            return e.getClaims();
+            throw new ExpiredJwtTokenException();
         } catch (UnsupportedJwtException e) {
             log.info("⚠️Unsupported JWT token.");
+            throw new InvalidJwtTokenException();
         } catch (IllegalArgumentException e) {
             log.info("⚠️JWT token compact of handler are invalid.");
+            throw new InvalidJwtTokenException();
         }
-        return null;
     }
 }

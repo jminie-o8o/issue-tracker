@@ -26,4 +26,9 @@ public class RuntimeExceptionHandler {
     public ResponseEntity<GeneralResponseDto> handleInvalidOauthClientNameException(Exception e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new GeneralResponseDto(400, e.getMessage()));
     }
+
+    @ExceptionHandler(value = JwtException.class)
+    public ResponseEntity<GeneralResponseDto> handleJwtException(Exception e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new GeneralResponseDto(401, e.getMessage()));
+    }
 }
