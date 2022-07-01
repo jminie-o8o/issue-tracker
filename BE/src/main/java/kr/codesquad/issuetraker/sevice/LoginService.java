@@ -15,10 +15,12 @@ import kr.codesquad.issuetraker.login.userinfo.OauthUserInfo;
 import kr.codesquad.issuetraker.login.userinfo.PasswordUserInfo;
 import kr.codesquad.issuetraker.login.userinfo.UserInfo;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class LoginService {
@@ -32,7 +34,7 @@ public class LoginService {
                 .orElseThrow(() -> new InvalidOauthClientNameException());
         OauthUserInfo userInfo = oauthClient.getUserInfo(requestDto.getAuthCode());
         User user = userRepository.findByEmail(userInfo.getEmail())
-                .orElse(registerUser(userInfo));
+                .orElseGet(() -> registerUser(userInfo));
         JwtToken accessToken = jwtProvider.createToken(user, JwtTokenType.ACCESS);
         JwtToken refreshToken = jwtProvider.createToken(user, JwtTokenType.REFRESH);
         return JwtResponseDto.of(accessToken, refreshToken);
