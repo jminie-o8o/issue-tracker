@@ -2,10 +2,13 @@ package com.example.issue_tracker.ui.issue
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.issue_tracker.AppSession
 import com.example.issue_tracker.common.addElement
 import com.example.issue_tracker.common.removeAllElement
 import com.example.issue_tracker.common.removeElement
+import com.example.issue_tracker.datastore.CustomDataStore
 import com.example.issue_tracker.model.Issue
+import com.example.issue_tracker.model.Jwt
 import com.example.issue_tracker.network.CEHModel
 import com.example.issue_tracker.network.CoroutineException
 import com.example.issue_tracker.repository.IssueRepository
@@ -16,8 +19,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class IssueViewModel @Inject constructor(private val issueRepository: IssueRepository) :
-    ViewModel() {
+class IssueViewModel @Inject constructor(
+    private val issueRepository: IssueRepository,
+    private val dataStore: CustomDataStore,
+) : ViewModel() {
 
     private val _issueList = MutableStateFlow<List<Issue>>(mutableListOf())
     val issueList: StateFlow<List<Issue>> = _issueList
@@ -42,7 +47,20 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
         _error.value = CoroutineException.checkThrowable(throwable)
     }
 
-    fun getIssues() {
+    init {
+        getJwt()
+        getIssues()
+    }
+
+    private fun getJwt() {
+        viewModelScope.launch {
+            dataStore.getJwt(CustomDataStore.JWT_KEY).collect { jwt ->
+                AppSession.jwt = Jwt(jwt)
+            }
+        }.onJoin
+    }
+
+    private fun getIssues() {
         viewModelScope.launch(exceptionHandler) {
             _issueList.value = issueRepository.getIssue()
         }
