@@ -1,55 +1,71 @@
 package com.example.issue_tracker.network
 
-import android.util.Log
-import com.example.issue_tracker.ui.common.MainApplication
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.flow.first
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object RetrofitObject {
-    private const val BASE_URL = "http://3.34.136.141:8080/"
+    const val BASE_URL = "http://13.124.177.85:8080/"
 
     @Provides
     @Singleton
-    fun okHttpClient(interceptor: AppInterceptor): OkHttpClient {
+    @Named("login")
+    fun provideOkHttpClient(): OkHttpClient {
+        val logger = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
         return OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .addInterceptor(HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
-            }).build()
+            .addInterceptor(logger)
+            .build()
     }
 
     @Provides
     @Singleton
-    fun retrofit(): APIService {
+    @Named("jwt")
+    fun provideJwtOkHttpClient(
+        interceptor: AuthInterceptor,
+    ): OkHttpClient {
+        val logger = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+        return OkHttpClient.Builder()
+            .addInterceptor(interceptor)
+            .addInterceptor(logger)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthApi(
+        @Named("login") okHttpClient: OkHttpClient,
+    ): AuthApi {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient(AppInterceptor()))
+            .client(okHttpClient)
             .build()
-            .create(APIService::class.java)
+            .create(AuthApi::class.java)
     }
 
-    class AppInterceptor : Interceptor {
-        @Throws(IOException::class)
-        override fun intercept(chain: Interceptor.Chain) : Response = with(chain) {
-            val accessToken = MainApplication.prefs.getString("accessToken", "")
-            val newRequest = request().newBuilder()
-                .addHeader("authorization", accessToken)
-                .build()
-            proceed(newRequest)
-        }
+    @Provides
+    @Singleton
+    fun provideApiService(
+        @Named("jwt") okHttpClient: OkHttpClient,
+    ): APIService {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+            .create(APIService::class.java)
     }
 }

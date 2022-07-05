@@ -1,6 +1,9 @@
 package com.example.issue_tracker.network
 
-import com.example.issue_tracker.model.*
+import com.example.issue_tracker.model.IssueDTO
+import com.example.issue_tracker.model.LabelDTO
+import com.example.issue_tracker.model.SignUpRequest
+import com.example.issue_tracker.model.SignUpResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -16,11 +19,6 @@ interface APIService {
 
     @POST("register")
     suspend fun requestRegister(@Body signUpRequest: SignUpRequest): SignUpResponse
-
-    @POST("login/oauth")
-    suspend fun requestGitHubLogin(
-        @Body gitHubOAuthRequest: GitHubOAuthRequest
-    ): OAuthResponse
 
     @POST("labels")
     suspend fun addLabels(@Body label: LabelDTO.LabelDTOItem): Response<Unit>
