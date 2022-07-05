@@ -8,11 +8,17 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class DataSourceModule{
+abstract class DataSourceModule {
 
     @Singleton
     @Binds
     abstract fun dataSourceBind(
         dataSourceImpl: DataSourceImpl,
     ): DataSource
+
+    @Singleton
+    @Binds
+    abstract fun oauthSourceBind(
+        oAuthDataSource: OAuthDataSourceImpl,
+    ): OAuthDataSource
 }
