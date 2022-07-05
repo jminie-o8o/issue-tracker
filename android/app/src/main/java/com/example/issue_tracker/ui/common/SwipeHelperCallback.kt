@@ -12,8 +12,8 @@ import kotlin.math.min
 
 
 class SwipeHelperCallback(
-    private val issueAdapter: IssueAdapter,
-    private val viewModel: IssueViewModel,
+    private val getIssueSwiped: (Int) -> Boolean,
+    private val changeIssueSwiped: (Int, Boolean) -> Unit,
 ) : ItemTouchHelper.Callback() {
 
     // swipe_view 를 swipe 했을 때 <닫기> 화면이 보이도록 고정하기 위한 변수들
@@ -47,10 +47,10 @@ class SwipeHelperCallback(
         )
 
     private fun getTag(viewHolder: RecyclerView.ViewHolder): Boolean =
-        viewModel.getIssueSwiped(viewHolder.adapterPosition)
+        getIssueSwiped(viewHolder.adapterPosition)
 
     private fun setTag(viewHolder: RecyclerView.ViewHolder, isClamped: Boolean) {
-        viewModel.changeIssueSwiped(viewHolder.adapterPosition, isClamped)
+        changeIssueSwiped(viewHolder.adapterPosition, isClamped)
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {

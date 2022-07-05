@@ -9,7 +9,10 @@ import com.example.issue_tracker.databinding.ItemIssueRecyclerViewBinding
 import com.example.issue_tracker.model.Issue
 
 class IssueAdapter(
-    private val viewModel: IssueViewModel,
+    private val closeIssue: (Int) -> Unit,
+    private val changeClickState: () -> Unit,
+    private val addCheckIssue: (Int) -> Unit,
+    private val removeCheckedIssue: (Int) -> Unit,
 ) : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(IssueDiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IssueViewHolder {
         val binding =
@@ -26,18 +29,18 @@ class IssueAdapter(
         fun bind(issue: Issue) {
             binding.issue = issue
             binding.tvCloseIssue.setOnClickListener {
-                viewModel.closeIssue(issue.issueId)
+                closeIssue(issue.issueId)
             }
 
             binding.cvSwipeView.setOnLongClickListener {
-                viewModel.changeClickedState()
+                changeClickState
                 false
             }
 
             binding.issueCheckBox.setOnCheckedChangeListener { _, isChecked ->
                 when (isChecked) {
-                    true -> viewModel.addChecked(issue.issueId)
-                    false -> viewModel.removeChecked(issue.issueId)
+                    true -> addCheckIssue(issue.issueId)
+                    false -> removeCheckedIssue(issue.issueId)
                 }
             }
         }

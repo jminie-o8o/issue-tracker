@@ -16,7 +16,6 @@ import com.example.issue_tracker.R
 import com.example.issue_tracker.common.repeatOnLifecycleExtension
 import com.example.issue_tracker.databinding.FragmentIssueBinding
 import com.example.issue_tracker.ui.common.SwipeHelperCallback
-import kotlinx.coroutines.flow.collect
 
 class IssueFragment : Fragment() {
 
@@ -43,9 +42,21 @@ class IssueFragment : Fragment() {
         goToSearchIssueFragment(findNavController)
         goToIssueAddFragment(findNavController)
         changeActionBarState()
-        viewModel.getIssues()
-        adapter = IssueAdapter(viewModel)
-        val swipeHelperCallback = SwipeHelperCallback(adapter, viewModel).apply {
+
+        adapter = IssueAdapter(
+            closeIssue = { issueId -> viewModel.closeIssue(issueId) },
+            changeClickState = { viewModel.checkLongClicked },
+            addCheckIssue = { issueId -> viewModel.addChecked(issueId) },
+            removeCheckedIssue = { issueId -> viewModel.removeChecked(issueId) }
+        )
+
+        val swipeHelperCallback = SwipeHelperCallback(
+            getIssueSwiped = { index -> viewModel.getIssueSwiped(index) },
+            changeIssueSwiped = { index, isClamped ->
+                viewModel.changeIssueSwiped(index,
+                    isClamped)
+            }
+        ).apply {
             setClamp(resources.displayMetrics.widthPixels.toFloat() / 4)
         }
         binding.rvIssue.adapter = adapter
