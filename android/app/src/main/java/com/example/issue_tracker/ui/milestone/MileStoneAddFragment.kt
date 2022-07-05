@@ -17,7 +17,6 @@ import com.example.issue_tracker.databinding.FragmentMileStoneAddBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class MileStoneAddFragment : Fragment() {

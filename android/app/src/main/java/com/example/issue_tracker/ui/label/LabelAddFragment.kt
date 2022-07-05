@@ -17,7 +17,6 @@ import com.example.issue_tracker.common.repeatOnLifecycleExtension
 import com.example.issue_tracker.databinding.FragmentLabelAddBinding
 import com.example.issue_tracker.network.CEHModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class LabelAddFragment : Fragment() {

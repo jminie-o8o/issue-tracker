@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 class LoginFragment : Fragment() {
 
     lateinit var binding: FragmentLoginBinding
-    private val viewModel: LoginViewModel by viewModels()
+    private val viewModel: LoginViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,7 +57,6 @@ class LoginFragment : Fragment() {
                 lifecycleScope.launch {
                     try {
                         val oAuthToken = UserApiClient.loginWithKakao(requireContext())
-                        Log.d("Kakao", oAuthToken.toString())
                     } catch (error: Throwable) {
                         if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
                             Log.d("Kakao", "사용자가 명시적으로 취소")
@@ -67,9 +66,9 @@ class LoginFragment : Fragment() {
                     }
                 }
             }
-        }
-        binding.cbGithubLogin.setOnClickListener {
-            navigationControl.navigate(R.id.action_loginFragment_to_gitHubWebViewFragment)
+            cbGithubLogin.setOnClickListener {
+                navigationControl.navigate(R.id.action_loginFragment_to_gitHubWebViewFragment)
+            }
         }
     }
 }

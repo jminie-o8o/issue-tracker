@@ -39,11 +39,4 @@ class HomeActivity : AppCompatActivity() {
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
         return true
     }
-
-//    override fun onNewIntent(intent: Intent?) {
-//        super.onNewIntent(intent)
-//        Log.d("테스트, 인텐트", intent.toString())
-//        val code = intent?.data?.getQueryParameter("code") ?: return
-//        Log.d("테스트, 코드", code)
-//    }
 }

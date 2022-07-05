@@ -15,7 +15,6 @@ import com.example.issue_tracker.R
 import com.example.issue_tracker.common.repeatOnLifecycleExtension
 import com.example.issue_tracker.databinding.FragmentIssueAddBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class IssueAddFragment : Fragment() {
