@@ -6,8 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/milestones")
@@ -23,6 +21,11 @@ public class MilestoneController {
     @PostMapping
     public ResponseEntity<MilestoneCreationResponseDto> createMilestone(@RequestBody MilestoneCreationRequestDto requestDto) {
         return ResponseEntity.ok(milestoneService.createMilestone(requestDto));
+    }
+
+    @DeleteMapping
+    public ResponseEntity<GeneralResponseDto> bulkDeleteMilestones(@RequestBody MilestoneBulkDeleteRequestDto requestDto) {
+        return ResponseEntity.ok(milestoneService.bulkDeleteMilestones(requestDto));
     }
 
     @GetMapping("/{milestoneId}")

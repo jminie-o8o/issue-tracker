@@ -7,7 +7,6 @@ import kr.codesquad.issuetraker.exception.MilestoneNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,6 +52,14 @@ public class MilestoneService {
         Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(() -> new MilestoneNotFoundException());
         milestone.markAsDeleted();
         milestoneRepository.save(milestone);
+        return new GeneralResponseDto(200, "마일스톤이 성공적으로 삭제되었습니다.");
+    }
+
+    public GeneralResponseDto bulkDeleteMilestones(MilestoneBulkDeleteRequestDto requestDto) {
+        List<Milestone> milestones = milestoneRepository.findAllById(requestDto.getMilestoneIds());
+        milestones.stream()
+                .peek(Milestone::markAsDeleted)
+                .forEach(milestoneRepository::save);
         return new GeneralResponseDto(200, "마일스톤이 성공적으로 삭제되었습니다.");
     }
 }
