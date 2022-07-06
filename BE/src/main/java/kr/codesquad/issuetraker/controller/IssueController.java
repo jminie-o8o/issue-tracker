@@ -24,6 +24,16 @@ public class IssueController {
         return ResponseEntity.ok(issueService.createIssue(requestDto));
     }
 
+    @DeleteMapping
+    public ResponseEntity<GeneralResponseDto> bulkDeleteIssues(@RequestBody IssueBulkDeleteRequestDto requestDto) {
+        return ResponseEntity.ok(issueService.bulkDeleteIssues(requestDto));
+    }
+
+    @PatchMapping
+    public ResponseEntity<GeneralResponseDto> bulkToggleIssueStatus(@RequestBody IssueBulkToggleStatusRequestDto requestDto) {
+        return ResponseEntity.ok(issueService.bulkToggleIssueStatus(requestDto));
+    }
+
     @GetMapping("/{issueId}")
     public ResponseEntity<IssueDetailResponseDto> loadIssueDetail(@PathVariable Long issueId) {
         return ResponseEntity.ok(issueService.getIssueDetail(issueId));

@@ -123,4 +123,20 @@ public class IssueService {
         commentRepository.save(comment);
         return new GeneralResponseDto(200, "댓글이 삭제되었습니다.");
     }
+
+    public GeneralResponseDto bulkDeleteIssues(IssueBulkDeleteRequestDto requestDto) {
+        List<Issue> issues = issueRepository.findAllById(requestDto.getIssueIds());
+        issues.stream()
+                .peek(Issue::markAsDeleted)
+                .forEach(issueRepository::save);
+        return new GeneralResponseDto(200, "이슈가 성공적으로 삭제되었습니다.");
+    }
+
+    public GeneralResponseDto bulkToggleIssueStatus(IssueBulkToggleStatusRequestDto requestDto) {
+        List<Issue> issues = issueRepository.findAllById(requestDto.getIssueIds());
+        issues.stream()
+                .peek(Issue::toggleIsOpened)
+                .forEach(issueRepository::save);
+        return new GeneralResponseDto(200, "이슈 상태가 변경되었습니다.");
+    }
 }
