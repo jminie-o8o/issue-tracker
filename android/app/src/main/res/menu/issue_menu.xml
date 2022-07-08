@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/issueFragment"
+        android:icon="@drawable/ic_issue_mark"
+        android:title="@string/menu_title_issue" />
+    <item
+        android:id="@+id/labelFragment"
+        android:icon="@drawable/ic_label_icon"
+        android:title="@string/menu_title_label" />
+    <item
+        android:id="@+id/mileStoneFragment"
+        android:icon="@drawable/ic_baseline_outlined_flag_24"
+        android:title="@string/menu_title_milestone" />
+    <item
+        android:id="@+id/accountFragment"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="@string/menu_title_my_account" />
+</menu>

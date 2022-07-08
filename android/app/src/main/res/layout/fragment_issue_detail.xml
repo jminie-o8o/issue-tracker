@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.example.issue_tracker.R" />
+
+        <variable
+            name="isOpened"
+            type="Boolean" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.label.LabelAddFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/issue_detail_app_bar_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="56dp">
+
+                <ImageView
+                    android:id="@+id/iv_go_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/go_back"
+                    android:src="@drawable/ic_baseline_navigate_before_24"
+                    app:tint="@color/primary_blue" />
+
+                <ImageButton
+                    android:id="@+id/ib_edit_mode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="24dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/issue_edit_mode"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_vector_4"
+                    app:tint="@color/primary_blue" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+            android:id="@+id/tv_issue_detail_title"
+            style="@style/TextHeadline5.bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/issue_detail_app_bar_layout"
+            tools:text="제목" />
+
+        <TextView
+            android:id="@+id/tv_issue_detail_issue_number"
+            style="@style/TextHeadline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toEndOf="@id/tv_issue_detail_title"
+            app:layout_constraintTop_toBottomOf="@id/issue_detail_app_bar_layout"
+            tools:text="#2" />
+
+        <com.example.issue_tracker.ui.label.CustomLabel
+            android:id="@+id/cl_opened_issue"
+            visible="@{isOpened}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:labelColorResource="@{R.color.primary_blueish}"
+            app:labelImage="@{R.drawable.ic_opened_issue_image}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_issue_detail_title" />
+
+        <com.example.issue_tracker.ui.label.CustomLabel
+            android:id="@+id/cl_closed_issue"
+            visible="@{!isOpened}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:labelColorResource="@{R.color.primary_purple}"
+            app:labelImage="@{R.drawable.ic_closed_issue_image}"
+            app:layout_constraintStart_toEndOf="@id/cl_opened_issue"
+            app:layout_constraintTop_toBottomOf="@id/tv_issue_detail_title" />
+
+        <View
+            android:id="@+id/view_detail_bottom"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/gray01"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_closed_issue" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_detail_bottom"
+            tools:listitem="@layout/item_issue_detail_recycler" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

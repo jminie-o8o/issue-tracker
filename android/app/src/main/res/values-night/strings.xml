@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label_btn_issue_filter">btn_issue_filter</string>
+    <string name="label_issue">이슈</string>
+    <string name="label_issue_search">issue_search</string>
+    <string name="label_filter_title">필터</string>
+    <string name="label_filter_button">filter_button</string>
+    <string name="label_delete_longclick">delete longClick</string>
+    <string name="label_delete_issue">delete_issue</string>
+    <string name="label_close_issue">close_issue</string>
+    <string name="label_search">검색</string>
+    <string name="label_search_issue_hint">검색어를 입력하세요</string>
+    <string name="label_nick_name">닉네임</string>
+</resources>

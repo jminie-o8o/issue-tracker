@@ -1,0 +1,12 @@
+*.iml
+.gradle
+/local.properties
+/.idea
+src/main/res/values/kakao_string.xml
+src/main/res/values/github_string.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LoginCustomButton">
+        <attr name="text" format="reference|string" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomLabel">
+        <attr name="title" format="reference|string" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomIssue">
+        <attr name="issueTitle" format="reference|string" />
+        <attr name="issueChoose" format="reference|string" />
+    </declare-styleable>
+</resources>

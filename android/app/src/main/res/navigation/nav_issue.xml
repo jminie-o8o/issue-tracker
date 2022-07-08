@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_issue"
+    app:startDestination="@id/issueFragment">
+
+    <fragment
+        android:id="@+id/issueFragment"
+        android:name="com.example.issue_tracker.ui.issue.IssueFragment"
+        android:label="fragment_issue"
+        tools:layout="@layout/fragment_issue" >
+        <action
+            android:id="@+id/action_issueFragment_to_issueFilterFragment"
+            app:destination="@id/issueFilterFragment" />
+        <action
+            android:id="@+id/action_issueFragment_to_issueAddFragment"
+            app:destination="@id/issueAddFragment" />
+        <action
+            android:id="@+id/action_issueFragment_to_issueSearchFragment"
+            app:destination="@id/issueSearchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.issue_tracker.ui.account.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
+    <fragment
+        android:id="@+id/labelFragment"
+        android:name="com.example.issue_tracker.ui.label.LabelFragment"
+        android:label="fragment_label"
+        tools:layout="@layout/fragment_label" >
+        <action
+            android:id="@+id/action_labelFragment_to_labelAddFragment"
+            app:destination="@id/labelAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mileStoneFragment"
+        android:name="com.example.issue_tracker.ui.milestone.MileStoneFragment"
+        android:label="fragment_mile_stone"
+        tools:layout="@layout/fragment_mile_stone" >
+        <action
+            android:id="@+id/action_mileStoneFragment_to_mileStoneAddFragment"
+            app:destination="@id/mileStoneAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/labelAddFragment"
+        android:name="com.example.issue_tracker.ui.label.LabelAddFragment"
+        android:label="fragment_label_add"
+        tools:layout="@layout/fragment_label_add" >
+        <action
+            android:id="@+id/action_labelAddFragment_to_labelFragment"
+            app:destination="@id/labelFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/issueFilterFragment"
+        android:name="com.example.issue_tracker.ui.issue.IssueFilterFragment"
+        android:label="IssueFilterFragment"
+        tools:layout="@layout/fragment_issue_filter" >
+        <action
+            android:id="@+id/action_issueFilterFragment_to_issueFragment"
+            app:destination="@id/issueFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mileStoneAddFragment"
+        android:name="com.example.issue_tracker.ui.milestone.MileStoneAddFragment"
+        android:label="MileStoneAddFragment"
+        tools:layout="@layout/fragment_mile_stone_add" >
+        <action
+            android:id="@+id/action_mileStoneAddFragment_to_mileStoneFragment"
+            app:destination="@id/mileStoneFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/issueAddFragment"
+        android:name="com.example.issue_tracker.ui.issue.IssueAddFragment"
+        android:label="IssueAddFragment"
+        tools:layout="@layout/fragment_issue_add" >
+        <action
+            android:id="@+id/action_issueAddFragment_to_issueFragment"
+            app:destination="@id/issueFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/issueSearchFragment"
+        android:name="com.example.issue_tracker.ui.issue.IssueSearchFragment"
+        android:label="IssueSearchFragment"
+        tools:layout="@layout/fragment_issue_search" >
+        <action
+            android:id="@+id/action_issueSearchFragment_to_issueFragment"
+            app:destination="@id/issueFragment" />
+    </fragment>
+</navigation>

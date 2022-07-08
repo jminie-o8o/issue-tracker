@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextHeadline4.Black01" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="TextHeadline5" parent="TextAppearance.MaterialComponents.Headline5" />
+
+    <style name="TextHeadline5.bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextHeadline5.bold.20">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextHeadline5.bold.20.black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextHeadline5.20">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextHeadline5.24">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextHeadline5.24.bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextHeadline5.20.black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1" />
+
+    <style name="Subtitle1.14">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Subtitle1.14.gray">
+        <item name="android:textColor">@color/gray02</item>
+    </style>
+
+
+    <style name="Subtitle1.16">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Subtitle1.18">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Subtitle1.18.gray">
+        <item name="android:textColor">@color/gray02</item>
+    </style>
+
+    <style name="Subtitle1.16.gray">
+        <item name="android:textColor">@color/gray02</item>
+    </style>
+
+
+    <style name="Subtitle1.white">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Subtitle1.white.bold">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Subtitle1.white.bold.20">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+
+    <style name="Subtitle1.bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Subtitle1.bold.18">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Subtitle1.bold.20">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="Subtitle1.bold.18.black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Subtitle1.bold.20.black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2" />
+
+    <style name="Subtitle2.bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Subtitle2.grey03">
+        <item name="android:textColor">@color/gray02</item>
+    </style>
+
+    <style name="styleActionMode" parent="@style/Widget.AppCompat.ActionMode">
+        <item name="background">@color/primary_blue</item>
+    </style>
+</resources>

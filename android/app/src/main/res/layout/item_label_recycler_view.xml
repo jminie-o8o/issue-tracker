@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="label"
+            type="com.example.issue_tracker.model.Label" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="87dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/close_blue" />
+
+            <TextView
+                android:id="@+id/tv_close_issue"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@color/close_blue"
+                android:gravity="center"
+                android:text="@string/issue_close"
+                android:textColor="@color/close_text" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cv_label_swipe_view"
+            android:layout_width="match_parent"
+            android:layout_height="87dp"
+            android:background="@color/white">
+
+            <CheckBox
+                android:id="@+id/label_check_box"
+                visible="@{label.longClicked}"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:buttonTint="@color/primary_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.example.issue_tracker.ui.label.CustomLabel
+                android:id="@+id/cl_label_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:labelColor="@{label.labelColor}"
+                app:labelTitle="@{label.labelTitle}"
+                app:layout_constraintStart_toEndOf="@+id/label_check_box"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@{label.labelContents}"
+                app:layout_constraintStart_toEndOf="@+id/label_check_box"
+                app:layout_constraintTop_toBottomOf="@id/cl_label_item"
+                tools:text="이것저것 다 넣기" />
+
+            <View
+                android:id="@+id/view_item_label_bottom"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/gray01"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/label_check_box" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+</layout>

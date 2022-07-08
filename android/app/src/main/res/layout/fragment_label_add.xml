@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="label"
+            type="com.example.issue_tracker.model.Label" />
+
+        <variable
+            name="viewModel"
+            type="com.example.issue_tracker.ui.label.LabelAddViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.label.LabelAddFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/add_label_app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="56dp">
+
+                <ImageView
+                    android:id="@+id/iv_go_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/go_back"
+                    android:src="@drawable/ic_baseline_navigate_before_24"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_add_new_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/add_new_label_title"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
+
+                <Button
+                    android:id="@+id/btn_label_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:backgroundTint="@android:color/transparent"
+                    android:enabled="false"
+                    android:outlineProvider="none"
+                    android:text="@string/label_save" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+            android:id="@+id/tv_label_title"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="26dp"
+            android:text="@string/label_title"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_label_app_bar_layout" />
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_label_title"
+            android:layout_width="314dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:background="@android:color/transparent"
+            android:hint="@string/label_title_required"
+            android:maxLines="1"
+            android:text="@={viewModel.labelTitle}"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/tv_label_title"
+            app:layout_constraintTop_toBottomOf="@id/add_label_app_bar_layout" />
+
+
+        <TextView
+            android:id="@+id/tv_mile_stone_description"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="26dp"
+            android:text="@string/label_description"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_label_title" />
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_label_description"
+            android:layout_width="314dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:background="@android:color/transparent"
+            android:hint="@string/label_optional_description"
+            android:maxLines="1"
+            android:text="@={viewModel.labelDescription}"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/tv_mile_stone_description"
+            app:layout_constraintTop_toBottomOf="@id/et_label_title" />
+
+        <TextView
+            android:id="@+id/tv_background_color"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="26dp"
+            android:text="@string/label_background_color"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_mile_stone_description" />
+
+        <TextView
+            android:id="@+id/tv_background_color_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:text="@{label.labelColor}"
+            app:layout_constraintStart_toEndOf="@id/tv_background_color"
+            app:layout_constraintTop_toBottomOf="@id/et_label_description"
+            tools:text="#3ddd" />
+
+        <ImageButton
+            android:id="@+id/ib_random_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="16dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/change_random_color"
+            android:onClick="@{()->viewModel.randomColor()}"
+            android:src="@drawable/ic_rotate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_label_description" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/label_preview_background"
+            app:layout_constraintTop_toBottomOf="@id/tv_background_color_number" />
+
+        <com.example.issue_tracker.ui.label.CustomLabel
+            android:id="@+id/custom_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
+            app:labelColor="@{label.labelColor}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_background_color_number" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

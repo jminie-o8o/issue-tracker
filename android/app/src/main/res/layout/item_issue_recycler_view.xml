@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="issue"
+            type="com.example.issue_tracker.model.Issue" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/close_blue" />
+
+            <TextView
+                android:id="@+id/tv_close_issue"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@color/close_blue"
+                android:gravity="center"
+                android:text="@string/issue_close"
+                android:textColor="@color/close_text" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cv_swipe_view"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@color/white">
+
+            <CheckBox
+                android:id="@+id/issue_check_box"
+                visible="@{issue.longClicked}"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:buttonTint="@color/primary_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_item_issue_mile_stone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="6dp"
+                android:drawablePadding="6dp"
+                android:text="@{issue.mileStone}"
+                android:textSize="12sp"
+                app:drawableStartCompat="@drawable/ic_baseline_outlined_flag_20"
+                app:drawableTint="@color/gray02"
+                app:layout_constraintStart_toEndOf="@id/issue_check_box"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="마일스톤" />
+
+            <TextView
+                android:id="@+id/tv_item_issue_title"
+                style="@style/Subtitle1.bold.18.black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:text="@{issue.title}"
+                app:layout_constraintStart_toEndOf="@id/issue_check_box"
+                app:layout_constraintTop_toBottomOf="@+id/tv_item_issue_mile_stone"
+                tools:text="제목" />
+
+            <TextView
+                android:id="@+id/tv_item_issue_contents"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="4dp"
+                android:maxLines="2"
+                android:paddingStart="0dp"
+                android:paddingEnd="10dp"
+                android:text="@{issue.contents}"
+                app:layout_constraintStart_toEndOf="@id/issue_check_box"
+                app:layout_constraintTop_toBottomOf="@+id/tv_item_issue_title"
+                tools:text="이슈에 대한 설명" />
+
+            <TextView
+                android:id="@+id/tv_item_issue_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_issue_label"
+                android:paddingStart="10dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="4dp"
+                android:text="@{issue.label.labelContents}"
+                app:layout_constraintStart_toEndOf="@id/issue_check_box"
+                app:layout_constraintTop_toBottomOf="@+id/tv_item_issue_contents"
+                tools:text="Label" />
+
+            <View
+                android:id="@+id/view_item_issue_bottom"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/gray01"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+</layout>

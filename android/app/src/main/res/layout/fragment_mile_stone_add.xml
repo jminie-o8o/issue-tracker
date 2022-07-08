@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.issue_tracker.ui.milestone.MileStoneAddViewModel" />
+
+        <variable
+            name="mileStone"
+            type="com.example.issue_tracker.model.MileStone" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.milestone.MileStoneAddFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/add_mile_stone_app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="56dp">
+
+                <ImageView
+                    android:id="@+id/iv_go_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/go_back"
+                    android:src="@drawable/ic_baseline_navigate_before_24"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_add_new_mile_stone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/add_new_mile_stone"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
+
+                <Button
+                    android:id="@+id/btn_mile_stone_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:backgroundTint="@android:color/transparent"
+                    android:enabled="false"
+                    android:outlineProvider="none"
+                    android:text="@string/label_save" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+            android:id="@+id/tv_mile_stone_title"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="26dp"
+            android:text="@string/label_title"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_mile_stone_app_bar_layout" />
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_mile_stone_title"
+            android:layout_width="314dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:background="@android:color/transparent"
+            android:hint="@string/label_title_required"
+            android:maxLines="1"
+            android:text="@={viewModel.mileStoneTitle}"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/tv_mile_stone_title"
+            app:layout_constraintTop_toBottomOf="@id/add_mile_stone_app_bar_layout" />
+
+        <TextView
+            android:id="@+id/tv_mile_stone_description"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="26dp"
+            android:text="@string/label_description"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_mile_stone_title" />
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_mile_stone_description"
+            android:layout_width="314dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:background="@android:color/transparent"
+            android:hint="@string/label_optional_description"
+            android:maxLines="1"
+            android:text="@={viewModel.mileStoneDescription}"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/tv_mile_stone_description"
+            app:layout_constraintTop_toBottomOf="@id/et_mile_stone_title" />
+
+        <TextView
+            android:id="@+id/tv_mile_stone_date"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="26dp"
+            android:text="@string/select_date"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_mile_stone_description" />
+
+        <TextView
+            android:id="@+id/tv_mile_stone_date_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:text="@{mileStone.dueDate}"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/tv_mile_stone_date"
+            app:layout_constraintTop_toBottomOf="@id/tv_mile_stone_description" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

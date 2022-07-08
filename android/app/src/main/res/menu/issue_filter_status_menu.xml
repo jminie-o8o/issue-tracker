@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/open_issue"
+        android:title="열린 이슈" />
+    <item
+        android:id="@+id/closed_issue"
+        android:title="닫힌 이슈" />
+</menu>

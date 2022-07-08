@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.issue_tracker.ui.issue.IssueViewModel" />
+
+        <variable
+            name="isClicked"
+            type="Boolean" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.issue.IssueFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/abb_bar_issue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tb_issue_fragment"
+                visible="@{isClicked}"
+                android:layout_width="match_parent"
+                android:layout_height="56dp">
+
+                <ImageButton
+                    android:id="@+id/btn_issue_filter"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="start"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/label_btn_issue_filter"
+                    android:src="@drawable/ic_baseline_filter_list_30"
+                    app:tint="@color/primary_blue" />
+
+                <TextView
+                    android:id="@+id/tv_issue_toolbar_title"
+                    style="@style/Subtitle1.bold.20.black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="36dp"
+                    android:text="@string/label_issue"
+                    tools:text="이슈" />
+
+                <ImageButton
+                    android:id="@+id/btn_issue_search"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="10dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/label_issue_search"
+                    android:src="@drawable/ic_baseline_search_30"
+                    app:tint="@color/primary_blue" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tb_issue_fragment_long_click"
+                visible="@{!isClicked}"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@color/primary_blue">
+
+                <ImageButton
+                    android:id="@+id/btn_close_long_click"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="start"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/label_delete_longclick"
+                    android:src="@drawable/ic_baseline_clear_26"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_checked_quantity"
+                    style="@style/Subtitle1.white.bold.20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="40dp"
+                    android:text="@{String.valueOf(viewModel.checkedIssueIdList.size())}"
+                    tools:text="1" />
+
+                <ImageButton
+                    android:id="@+id/btn_app_bar_close_issue"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="10dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/label_close_issue"
+                    android:src="@drawable/ic_baseline_inbox_30"
+                    app:tint="@color/white" />
+
+                <ImageButton
+                    android:id="@+id/btn_delete_issue"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="20dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/label_delete_issue"
+                    android:src="@drawable/ic_baseline_delete_outline_30"
+                    app:tint="@color/white" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_issue"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/abb_bar_issue"
+            tools:listitem="@layout/item_issue_recycler_view" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_issue_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/primary_blue"
+            android:contentDescription="@string/add_new_issue"
+            android:src="@drawable/ic_baseline_add_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/white" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
