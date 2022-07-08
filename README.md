@@ -42,7 +42,7 @@
 |:--------:|:--------:|:--------:|:--------:|
 | <img src=https://user-images.githubusercontent.com/79504043/177956772-aebe64bd-bd47-4169-b9cf-1451230d2621.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/177988707-c8965b34-8f7c-4880-9ff4-62dd6c3129bc.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/177959254-09b40b46-abdd-4479-8300-19c443ab0907.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/177958085-562789ac-412f-4346-b292-2a7bd6f6ccb8.gif width=200> |
 
-| 이슈 필터 | 이슈 검색 | 레이블  | 마일스톤 추가 |
+| 이슈 필터 | 이슈 검색 | 레이블 추가 | 마일스톤 추가 |
 |:--------:|:--------:|:--------:|:--------:|
 | <img src=https://user-images.githubusercontent.com/79504043/177961096-11f8f782-cc30-4bba-b5ac-916cb3dc4653.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/177962476-bf6a537d-d59e-4ecf-99da-7c0015af883a.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/177966815-7abcda81-aca1-487d-bd36-847e304eacf8.gif width=200> | <img src=https://cdn.discordapp.com/attachments/985744748759359498/994909627873505320/milestoneadd.gif width=200> |
 
