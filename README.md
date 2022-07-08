@@ -1,5 +1,4 @@
 # issue-tracker
-그룹 프로젝트 #5
   
 #### 팀원소개
 |Name|Part|Github|
