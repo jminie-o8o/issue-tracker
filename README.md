@@ -43,7 +43,7 @@
 
 | 이슈 필터 | 이슈 검색 | 레이블 추가 | 마일스톤 추가 |
 |:--------:|:--------:|:--------:|:--------:|
-| <img src=https://user-images.githubusercontent.com/79504043/183876156-8cc0684f-181c-4ed8-a021-ddcba04f0a43.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/183877330-6bd6b04e-833c-40f5-b03c-399ac53ed2c7.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/177966815-7abcda81-aca1-487d-bd36-847e304eacf8.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/183877589-8ac92486-da0d-4d5f-adad-c4add2c336b3.gif width=200> |
+| <img src=https://user-images.githubusercontent.com/79504043/183876156-8cc0684f-181c-4ed8-a021-ddcba04f0a43.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/183877330-6bd6b04e-833c-40f5-b03c-399ac53ed2c7.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/177966815-7abcda81-aca1-487d-bd36-847e304eacf8.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/183878295-cf489780-46ea-4faf-8bec-a7019e292e1f.gif width=200> |
 
 ## MAD Scorecard
 <img src="https://user-images.githubusercontent.com/79504043/177989379-37cf40dc-0e11-4944-a1a9-8a3ee113065b.png">  
